@@ -17,7 +17,7 @@ const data = fs.readFileSync('./test.js');
 data.toString();
 ```
 
-node 是个高级语言，关于二进制级别处理都封装成 Buff 模块，读取文件拿到的是 Buff 类型的对象（文件的二进制形式）
+node 对于二进制级别的操作封装在 Buff 模块中。读取文件拿到的是 Buff 类型的对象（文件的二进制形式）
 
 **文件的流 Stream**
 
@@ -46,46 +46,11 @@ const buf1 = Buffer.from('创建一个Buff');
 
 对 http 模块的使用，展示如何 handle 不同路由
 
-```js
-const http = require('http');
-const fs = require('fs');
-
-const server = http.createServer((request, response) => {
-    const { url, method，headers } = request;
-
-    if(url === '/' && method === 'GET') {
-        // 返回服务器上的 html 文件
-        fs.readFile('index.html', (err, data) => {
-            if(err) {
-                response.writeHead(500, {'Content-Type': 'text/plain;charset=utf-8'});
-                response.end(`500 服务器内部错误`);
-            }
-            response.statusCode = 200;
-            response.setHeader('Content-Type', 'text/html');
-            response.end(data);
-        })
-
-    } else if (url === '/users' && method === 'GET') {
-        // handle 接口请求，返回 json 文件
-        response.writeHead(200, {'Content-Type': 'application/json'});
-        response.end(JSON.stringfy({name: 'Andy'}));
-
-    } else if(method === 'GET' && headers.accept.indexOf('image/*') !== -1) { 
-        // handle 图片文件的请求
-        
-        fs.createReadStream('.' + url).pipe(response);
-
-    } else {
-        // 返回404
-        response.statusCode = 404;
-        response.end(`404 Not Found`);
-    }
-});
-
-server.listen(3000);
-```
+示例代码见 `./http/http.js`
 
 ### 第三方模块
+
+#### download-git-repo 模块
 
 ```
 npm i download-git-repo -s 
