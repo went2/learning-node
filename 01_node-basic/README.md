@@ -125,3 +125,7 @@ async function clone(repo, desc) {
     }
 }
 ```
+
+## 用node写小工具：vue-auto-router-cli
+
+路由约束：实现在`src/views` 目录下添加`.vue`添加组件时，自动在首页添加一条路由
