@@ -11,6 +11,8 @@ function request(url, callback) {
   originRequest(url, options, callback);
 }
 
+const url = `https://www.nunuyy2.org/dianshiju/%E5%90%8C%E6%80%A7---0-.html`;
+
 for (let i = 100553; i < 100563; i++) {
   const url = `https://www.dy2018.com/i/${i}.html`;
   request(url, (err, res, body) => {
