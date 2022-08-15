@@ -2,7 +2,7 @@
  * 导出 mongoDB 数据库的连接
  */
 
-const { MongoDBClient } = require("mongodb");
+const { MongoClient } = require("mongodb");
 
 class MongoDB {
 
