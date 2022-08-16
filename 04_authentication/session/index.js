@@ -55,4 +55,3 @@ router.get('/users/getUser', async ctx => {
 
 app.use(router.routes());
 app.listen(3000);
-

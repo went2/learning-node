@@ -16,6 +16,8 @@ session基于cookie实现，cookie是一种协议，当浏览器在A域名下有
 
 纯粹的 cookie 机制不会用于鉴权，因为可存的东西少，并且存在浏览器端的值容易被修改。基于 cookie 可实现 sesison，cookie 只存 sid。
 
+session 是个保存在服务端的对象，里面存用户登陆相关的信息。
+
 session 基本实现见 './cookie.js';
 
 在 session 基本实现中，将session保存到代码里(即内存中)，这种方式一会占用很多服务器内存(如万人在线)，二来如果使用分布式部署，在同一个机器或不同机器上开启多个后端实例的话，它们不共享session，所以一般情况，将session存到专门的存储服务器上，如数据库，Redis，MongoDB
@@ -25,3 +27,9 @@ session 基本实现见 './cookie.js';
 使用 `koa-session` 处理 session 见 './app-session.js';
 
 ### 使用 session 进行鉴权
+
+见'./session/index.js'，在服务端保存 session 信息
+
+使用中间件实现鉴权，除了 `/login` 的任何请求，都要判断 session 对象中是否有用户登陆相关的信息，有则 `next()`，没有则拦截。
+
+用户登出时，删除session中相应的登陆信息。
