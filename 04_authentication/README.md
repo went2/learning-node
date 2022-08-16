@@ -18,6 +18,10 @@ session基于cookie实现，cookie是一种协议，当浏览器在A域名下有
 
 session 基本实现见 './cookie.js';
 
+在 session 基本实现中，将session保存到代码里(即内存中)，这种方式一会占用很多服务器内存(如万人在线)，二来如果使用分布式部署，在同一个机器或不同机器上开启多个后端实例的话，它们不共享session，所以一般情况，将session存到专门的存储服务器上，如数据库，Redis，MongoDB
+
 在正式应用中使用中间件处理 session，走完这个中间件，session就在上下文环境中了。
 
+使用 `koa-session` 处理 session 见 './app-session.js';
 
+### 使用 session 进行鉴权
