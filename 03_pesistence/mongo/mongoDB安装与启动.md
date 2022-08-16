@@ -1,6 +1,6 @@
 # MongoDB 安装与启动
 
-## 安装：跟随官方文档的步骤
+## 安装：官方文档的步骤
 
 如何在 Mac 上安装、启动 MongoDB，以及在 Node.js 上连接 MongoDB。
 
@@ -36,7 +36,7 @@ brew services stop mongodb-community@6.0
 mongod --config /usr/local/etc/mongod.conf --fork
 
 // 终止
-// 用 mongosh 连接到 mongod 进城，用 shutdown 命令终止
+// 用 mongosh 连接到 mongod 进程，用 shutdown 命令终止
 ```
 
 ## 安装时的错误

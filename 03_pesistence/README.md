@@ -34,7 +34,7 @@ app 数据持久化的工作终归要在服务端做。
 
 为什么敏捷？因为不用提前设计表结构，直接存取json
 
-- Mac 上安装 MongoDB 并启动服务，见[mongoDB 安装]()
+- Mac 上安装 MongoDB 并启动服务，见[mongoDB安装与启动](./mongo/mongoDB安装与启动.md)
 - mongodb express 控制界面（需搭配 docker 使用）
 
 #### 4.1 native
@@ -43,7 +43,6 @@ app 数据持久化的工作终归要在服务端做。
 
 - 使用 EventEmitter 进行异步过程之间的通信（如异步的数据库创建与应用创建之间的通信）
   
-
 
 #### 4.2 Mongoose
 
