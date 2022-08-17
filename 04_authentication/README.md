@@ -57,8 +57,27 @@ session 不足：
 
 使用 token 可以让后端不存任何信息，登陆信息都在前端，后端只需解密认证。
 
+简易 token 鉴权见 './token/index.js'
+
+Bearer Token 分三部分：
+- 令牌头
+- payload
+- 哈希
+
+后端处理login 时，使用 `jwt.sign()` 生成token发给客户端，客户端收到后存到`localStorage`，后续发请求时，添加到header上（axios的请求拦截注入）
+
+生成 token 用的是 base64 算法，可逆。
+
+后端处理每个请求时，先 `jwtAuth({secrect})` 进行解密，判断用户是否是登陆状态。
+
 ## OAuth
 
-第三方认证
+第三方认证过程
+
+![OAuth-processs](./images/OAuth-process.png)
 
 ## SSO
+
+SSO 认证过程
+
+![SSO-processs](./images/SSO-process.png)
