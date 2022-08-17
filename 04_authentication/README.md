@@ -49,6 +49,16 @@ app.use((ctx, next) => {
 });
 ```
 
+## Token 鉴权
 
+session 不足：
+    - session 使得服务器要保存状态（尽管可以存到Redis）
+    - 不灵活，基于cookie实现，不能用到app中，无法实现跨域
 
-用户登出时，删除session中相应的登陆信息。
+使用 token 可以让后端不存任何信息，登陆信息都在前端，后端只需解密认证。
+
+## OAuth
+
+第三方认证
+
+## SSO
