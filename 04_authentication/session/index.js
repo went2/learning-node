@@ -20,10 +20,9 @@ app.use((ctx, next) => {
         next();
     } else {
         if (!ctx.session.userinfo) {
-            ctx.body = {
-                message: '未登陆'
-            }
-        } else {
+            // 未登陆
+            ctx.body = '请先登陆';
+        } else { // 已登陆
             next();
         }
     }
@@ -31,27 +30,27 @@ app.use((ctx, next) => {
 
 router.post('/users/login', async ctx => {
     const { body } = ctx.request;
-    // 省略密码认证过程
-
+    // ...省略密码认证过程
     ctx.session.userinfo = body.username;
     ctx.body = {
-        message: '登陆成功'
+        message: '登陆成功',
     };
 });
 
 router.post('/users/logout', async ctx => {
     delete ctx.session.userinfo;
     ctx.body = {
-        message: '登出'
+        message: '登出成功',
     };
 });
 
-router.get('/users/getUser', async ctx => {
+router.get('users/getUser', async ctx => {
     ctx.body = {
         message: '获取用户信息成功',
-        userinfo: ctx.session.userinfo
-    }
+        userinfo: ctx.session.userinfo,
+    };
 });
+
 
 app.use(router.routes());
 app.listen(3000);

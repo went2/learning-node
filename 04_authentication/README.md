@@ -1,7 +1,7 @@
 # 鉴权 Authentication
 
 authentication: 鉴权，识别一个用户、设备的身份，用于登陆场景。
-authorization: 授权，分配用户的访问资源的权限。
+authorization: 授权，分配权限，设置用户能否访问哪些资源。
 
 三种常见的鉴权方式：
 
@@ -28,8 +28,27 @@ session 基本实现见 './cookie.js';
 
 ### 使用 session 进行鉴权
 
-见'./session/index.js'，在服务端保存 session 信息
+见'./session/index.js'，使用中间件实现鉴权，将 session 对象挂到 `context` 上作为它的属性。
 
-使用中间件实现鉴权，除了 `/login` 的任何请求，都要判断 session 对象中是否有用户登陆相关的信息，有则 `next()`，没有则拦截。
+中间件的逻辑是，除了 `/login` 的任何请求，都要判断 session 对象中是否有用户登陆相关的信息，有则 `next()`，没有则拦截。与之相配合的路由是 `/user/login` 中给 session 添加登陆信息，`/user/logout` 删除 session 中的登陆信息。
+
+```js
+// 鉴权中间件
+app.use((ctx, next) => {
+    if (ctx.url.indexOf('login') > -1) {
+        next();
+    } else {
+        if (!ctx.session.userinfo) {
+            ctx.body = {
+                message: '用户未登陆'
+            }
+        } else {
+            next();
+        }
+    }
+});
+```
+
+
 
 用户登出时，删除session中相应的登陆信息。
