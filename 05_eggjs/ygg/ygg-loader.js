@@ -14,18 +14,19 @@ function loader(dir, cb) {
 
     files.forEach(filename => {
         filename = filename.replace('.js', '');
-        const fileurl = require(fileDir + '/' + filename);
-        cb(filename, fileurl);
+        const file = require(fileDir + '/' + filename);
+        cb(filename, file);
     });
 }
 
-function initRouter() {
+function initRouter(app) {
     const router = new Router();
 
     loader('../routes', (filename, routes) => {
-
         // 获取路由文件名作为前缀，user.js 文件 ==> /user
         const prefix = filename === 'index' ? '' : `/${filename}`;
+
+        routes = typeof routes === 'function' ? routes(app) : routes;
 
         Object.keys(routes).forEach(key => {
             // key: 'get /details'
@@ -41,6 +42,15 @@ function initRouter() {
     return router;
 }
 
+function initController() {
+    const controller = {}
+    loader('../controller', (filename, ctrl) => {
+        controller[filename] = ctrl;
+    });
+    return controller;
+}
+
 module.exports = {
-    initRouter
+    initRouter,
+    initController
 };
