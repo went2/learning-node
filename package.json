@@ -1,11 +1,8 @@
 {
   "name": "learning-node",
   "version": "1.0.0",
-  "description": "## 使用模块",
+  "description": "感受Node.js在前端与服务端开发中的威力",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/went2/learning-node.git"
