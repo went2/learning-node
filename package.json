@@ -1,7 +1,7 @@
 {
   "name": "learning-node",
   "version": "1.0.0",
-  "description": "感受Node.js在前端与服务端开发中的威力",
+  "description": "Node.js 学习仓",
   "main": "index.js",
   "repository": {
     "type": "git",
