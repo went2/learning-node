@@ -1,10 +1,6 @@
 # 网络编程 Network programming
 
-## 1. 简易 http 服务端实现
-
-见 `../01_node-basic/http/http.js`
-
-## 2. 跨域
+## 1. 跨域
 
 什么是同源？协议、host、端口号都相同叫同源。
 
@@ -33,14 +29,17 @@
 使用 `http-proxy-middleware` 实现反向代理，webpack 用的就是它实现反向代理
 
 ```js
-const express = require('express');
-const proxy = require('http-proxy-middleware');
+const express = require("express");
+const proxy = require("http-proxy-middleware");
 const app = express();
 
-app.use('api', proxy({
-  target: 'http://localhost:4000',
-  changeOrigin: true
-}))
+app.use(
+  "api",
+  proxy({
+    target: "http://localhost:4000",
+    changeOrigin: true,
+  })
+);
 ```
 
 使用反向代理服务器转发后，就不需要在后端对设置响应头了。
@@ -58,11 +57,11 @@ cors 是 w3c 规范，真正意义上解决跨域问题，需要服务器对请�
 非简单请求，浏览器会触发预检请求（OPTIONS），服务器要响应预检请求，在相应头添加：
 
 ```js
-if (method === 'OPTIONS' && url === 'api/users') {
+if (method === "OPTIONS" && url === "api/users") {
   res.writeHead(200, {
-    'Access-Allow-Control-Origin': 'http://localhost:3000',
-    'Access-Allow-Control-Headers': 'Costomized-Header, Content-Type',
-    'Access-Allow-Control-Methods': 'PUT'
+    "Access-Allow-Control-Origin": "http://localhost:3000",
+    "Access-Allow-Control-Headers": "Costomized-Header, Content-Type",
+    "Access-Allow-Control-Methods": "PUT",
   });
   res.end();
 }
@@ -72,18 +71,14 @@ if (method === 'OPTIONS' && url === 'api/users') {
 
 ```js
 // 1.服务器设置cookie
-res.setHeader('Set-Cookie', 'cookie1=df73ehnv66wer');
+res.setHeader("Set-Cookie", "cookie1=df73ehnv66wer");
 
 // 2.浏览器接受到该响应头后会保存cookie，并在接下去的请求头中添加cookie
 
 // 3. 产生跨域时，服务器接收不到cookie，需要在对预检请求的响应中加入：
-res.setHeader('Access-Allow-Control-Credentials', 'true'); 
+res.setHeader("Access-Allow-Control-Credentials", "true");
 ```
 
-## 3. Bodyparser
-
-略
-
-## 4. 使用 node 写一个爬虫
+## 2. 使用 node 写一个爬虫
 
 见`./spider.js`
